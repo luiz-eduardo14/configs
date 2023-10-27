@@ -10,13 +10,20 @@ fi
 export_all_systems=$(ls -d /etc/[A-Za-z]*[_-][rv]e[lr]* | grep -v "lsb" | cut -d'/' -f3 | cut -d'-' -f1 | cut -d'_' -f1| cut -d' ' -f1);
 
 
+case $export_all_systems in
+    *debian*)
+        echo "Installing dependencies for Debian..."
+        apt-get update && apt-get install curl wget tar gpg
+        ;;
+esac
+
 if [ ! -d /usr/bin/git ];
 then
     echo "Installing Git..."
     case $export_all_systems in
         *debian*)
             echo "Downloading Git from Debian and installing with apt..."
-            sudo apt install git
+            apt-get install git
             ;;
         *arch*)
             echo "Downloading Git from Arch Linux and installing with pacman..."
@@ -40,7 +47,7 @@ then
     case $export_all_systems in
         *debian*)
             echo "Downloading Zsh from Debian and installing with apt..."
-            sudo apt install zsh
+            apt-get install zsh
             ;;
         *arch*)
             echo "Downloading Zsh from Arch Linux and installing with pacman..."
