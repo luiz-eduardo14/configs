@@ -10,13 +10,29 @@ fi
 export_all_systems=$(ls -d /etc/[A-Za-z]*[_-][rv]e[lr]* | grep -v "lsb" | cut -d'/' -f3 | cut -d'-' -f1 | cut -d'_' -f1| cut -d' ' -f1);
 
 
-# if [ ! -d /usr/bin/git ]; 
-# then
-#     echo "Installing Git..."
-#     sudo pacman -S git
-# else 
-#     echo "Git is already installed."
-# fi
+if [ ! -d /usr/bin/git ];
+then
+    echo "Installing Git..."
+    case $export_all_systems in
+        *debian*)
+            echo "Downloading Git from Debian and installing with apt..."
+            sudo apt install git
+            ;;
+        *arch*)
+            echo "Downloading Git from Arch Linux and installing with pacman..."
+            sudo pacman -S git
+            ;;
+        *Mac*)
+            echo "Downloading Git from Mac and installing with brew..."
+            brew install git
+            ;;
+            *)
+            echo "Exiting script, because your system is not supported."
+            exit 1
+    esac
+else
+    echo "Git is already installed."
+fi
 
 if [ ! -d /usr/bin/zsh ];
 then
