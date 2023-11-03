@@ -1,0 +1,3 @@
+- sudo nano /etc/gdm/custom.conf
+- uncomment WaylandEnable=false
+- sudo systemctl restart gdm
