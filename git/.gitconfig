@@ -1,0 +1,11 @@
+[user]
+	email = masterdudu123@hotmail.com
+	name = luiz-eduardo14
+[core]
+	editor = nvim
+[alias]
+  	st = status
+  	c = commit -m
+  	br = branch
+	ch = checkout
+	ca = commit --amend
